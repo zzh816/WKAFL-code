@@ -17,19 +17,17 @@ date = datetime.now().strftime('%Y-%m-%d')
 #定义参量
 class Arguments():
     def __init__(self):
-        self.batch_size = 4
-        self.test_batch_size = 10
-        self.lr = 0.0000001
+        self.batch_size = 4       # batch size of each client for local training
+        self.test_batch_size = 10   # batch size for test datasets
+        self.lr = 0.0000001       # learning rate of global model
         self.no_cuda = True
-        self.seed = 1
-        self.log_train = 100
-        self.log_test = 100
-        self.save_model = False
-        self.users_total = 2000  # 虚拟用户总量
-        self.K = 1  # 每回合参与用户
-        self.batchs_round = 1  # 每回合单个用户使用的批数量
-        self.itr_numbers = 5000  # 迭代总数
-        self.momentum = 0.9    # 加速参数
+        self.seed = 1   # parameter for the server to initialize the model
+        self.log_train = 100    # number of iterations for the two tests on training datasets
+        self.log_test = 100     # number of iterations for the two tests on test datasets
+        self.users_total = 2000  # number of total clients P
+        self.K = 1  # number of participant clients K
+        self.itr_numbers = 5000  # total number of iterations
+        self.momentum = 0.9    # parameter for momentum
 
 
 

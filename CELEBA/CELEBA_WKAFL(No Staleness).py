@@ -17,23 +17,21 @@ date = datetime.now().strftime('%Y-%m-%d')
 #定义参量
 class Arguments():
     def __init__(self):
-        self.batch_size = 4
-        self.test_batch_size = 10
-        self.lr = 0.0001
+        self.batch_size = 4    # batch size of each client for local training
+        self.test_batch_size = 10   # batch size for test datasets
+        self.lr = 0.0001      # learning rate of global model
         self.no_cuda = True
-        self.seed = 1
-        self.log_train = 100
-        self.log_test = 100
-        self.save_model = False
-        self.users_total = 2000  # 虚拟用户总量
-        self.users_round = 5  # 每回合参与用户
-        self.K = 15 #每个用户抽取概率
-        self.batchs_round = 1  # 每回合单个用户使用的批数量
-        self.itr_numbers = 5000  # 迭代总数
-        self.CB1 = 500 #预估初始梯度上界
-        self.CB2 = 5
-        self.alpha = 0.1
-        self.threshold = 0.3
+        self.seed = 1    # parameter for the server to initialize the model
+        self.log_train = 100        # number of iterations for the two neighbour tests on training datasets
+        self.log_test = 100   # number of iterations for the two neighbour tests on test datasets
+        self.users_total = 2000      # number of total clients P
+        self.K = 15       # number of participant clients K
+        self.batchs_round = 1  # number of batches used by a client
+        self.itr_numbers = 5000    # total number of iterations
+        self.CB1 = 500     # clip parameter in both stages
+        self.CB2 = 5   # clip parameter B at stage two
+        self.alpha = 0.1    # parameter for momentum to alleviate the effect of non-IID data
+        self.threshold = 0.3  # threshold to judge whether gradients are consistent
 
 
 args = Arguments()

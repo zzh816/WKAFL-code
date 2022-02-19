@@ -13,23 +13,23 @@ date = datetime.now().strftime('%Y-%m-%d %H:%M')
 
 class Argument():
     def __init__(self):
-        self.user_num = 100
-        self.K = 1
-        self.lr = 0.00005
-        self.itr_test = 20
-        self.batch_size = 4
-        self.test_batch_size = 128
-        self.total_iterations = 1500
-        self.classes = 1
+        self.user_num = 100       # number of total clients P
+        self.K = 1     # number of participant clients K
+        self.lr = 0.00005      # learning rate of global model
+        self.itr_test = 20        # number of iterations for the two neighbour tests on test datasets
+        self.batch_size = 4      # batch size of each client for local training
+        self.test_batch_size = 128    # batch size for test datasets
+        self.total_iterations = 1500    # total number of iterations
+        self.classes = 1   # number of data classes on each client, which can determine the level of non-IID data
 
-        self.yunItr = 5
-        self.yunBatchSize = 50
-        self.yunNum = 100
-        self.yunclasses = 10
-        self.gamma = 1
-        self.rho = 0.2      # sim
-        self.epsilon = 0.1
-        self.seed = 1
+        self.yunItr = 5   # the frequency of lazy update
+        self.yunBatchSize = 50   # batch size for lazy update on the server
+        self.yunNum = 100    # number of collected data on the server
+        self.yunclasses = 10    # number of data classes on the server
+        self.gamma = 1     # the parameter of score function
+        self.rho = 0.2      # the parameter of score function
+        self.epsilon = 0.1  # the parameter of score function
+        self.seed = 1     # parameter for the server to initialize the model
         self.cuda_use = False
 
 args = Argument()

@@ -163,6 +163,7 @@ class FederatedDataLoader(object):
     """
     Data loader. Combines a dataset and a sampler, and provides
     single or several iterators over the dataset.
+
     Arguments:
         federated_dataset (FederatedDataset): dataset from which to load the data.
         batch_size (int, optional): how many samples per batch to load
@@ -186,6 +187,8 @@ class FederatedDataLoader(object):
     def __init__(
         self,
         federated_dataset,
+        worker_have_list = [], #已经抽取的用户列表
+        worker_one_round = False, # 判断是否剔除上述学习者
         batch_size=8,
         shuffle=False,
         num_iterators=1,
@@ -208,6 +211,7 @@ class FederatedDataLoader(object):
                 "torch.utils.data.DataLoader instead."
             )
 
+        self.worker_have_list = worker_have_list
         self.federated_dataset = federated_dataset
         self.batch_size = batch_size
         self.drop_last = drop_last
@@ -216,8 +220,15 @@ class FederatedDataLoader(object):
 
         # Build a batch sampler per worker
         self.batch_samplers = {}
+        if worker_one_round:
+            for worker in self.worker_have_list:
+                if worker in self.workers:
+                    self.workers.remove(worker)
         if worker_num !=0:
             self.workers = random.sample(self.workers,worker_num)
+        if worker_one_round:
+            for worker in self.workers:
+                self.worker_have_list.append(worker)
         for worker in self.workers:
             if batch_size >=1:
                 batch = batch_size

@@ -13,16 +13,17 @@ date = datetime.now().strftime('%Y-%m-%d %H:%M')
 
 class Argument():
     def __init__(self):
-        self.user_num = 3000
-        self.K = 20
-        self.lr = 0.005
-        self.batch_size = 4
-        self.itr_test = 50
-        self.test_batch_size = 128
-        self.total_iterations = 5000
-        self.alpha = 0.1
-        self.seed = 1
-        self.classes = 1
+        self.user_num = 1000    # number of total clients P
+        self.K = 10  # number of participant clients K
+        self.lr = 0.005      # learning rate of global model
+        self.batch_size = 4       # batch size of each client for local training
+        self.itr_test = 50         # number of iterations for the two neighbour tests on test datasets
+        self.itr_train = 100         # number of iterations for the two neighbour tests on training datasets
+        self.test_batch_size = 128    # batch size for test datasets
+        self.total_iterations = 5000   # total number of iterations
+        self.alpha = 0.1        # parameter for momentum
+        self.seed = 1     # parameter for the server to initialize the model
+        self.classes = 1     # number of data classes on each client, which can determine the level of non-IID data
         self.cuda_use = False
 
 args = Argument()

@@ -17,19 +17,19 @@ date = datetime.now().strftime('%Y-%m-%d %H:%M')
 
 class Argument():
     def __init__(self):
-        self.user_num = 3000
-        self.K = 20
-        self.lr = 0.005
-        self.batch_size = 16
-        self.CB1 = 100
-        self.CB2 = 10
-        self.test_batch_size = 128
-        self.total_iterations = 10000
-        self.threshold = 0.3
-        self.itr_test = 100
-        self.alpha = 0.1
-        self.stageTwo = 5000
-        self.seed = 1
+        self.user_num = 3000     # number of total clients P
+        self.K = 20     # number of participant clients K
+        self.lr = 0.005      # learning rate of global model
+        self.batch_size = 16     # batch size of each client for local training
+        self.CB1 = 100   # clip parameter in both stages
+        self.CB2 = 10  # clip parameter B at stage two
+        self.test_batch_size = 128    # batch size for test datasets
+        self.total_iterations = 10000  # total number of iterations
+        self.threshold = 0.3   # threshold to judge whether gradients are consistent
+        self.itr_test = 100    # number of iterations for the two neighbour tests on test datasets
+        self.alpha = 0.1   # parameter for momentum to alleviate the effect of non-IID data
+        self.stageTwo = 5000        # the iteration of stage one
+        self.seed = 1    # parameter for the server to initialize the model
         self.cuda_use = False
 
 args = Argument()

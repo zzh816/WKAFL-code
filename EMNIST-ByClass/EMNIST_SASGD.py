@@ -13,14 +13,14 @@ date = datetime.now().strftime('%Y-%m-%d %H:%M')
 
 class Argument():
     def __init__(self):
-        self.user_num = 3000
-        self.K = 20
-        self.lr = 0.001
-        self.batch_size = 16
-        self.test_batch_size = 128
-        self.total_iterations = 10000
-        self.itr_test = 100
-        self.seed = 1
+        self.user_num = 3000         # number of total clients P
+        self.K = 20     # number of participant clients K
+        self.lr = 0.001      # learning rate of global model
+        self.batch_size = 16     # batch size of each client for local training
+        self.test_batch_size = 128      # batch size for test datasets
+        self.total_iterations = 10000    # total number of iterations
+        self.itr_test = 100     # number of iterations for the two neighbour tests on test datasets
+        self.seed = 1        # parameter for the server to initialize the model
         self.cuda_use = False
 
 args = Argument()
